@@ -7,23 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020DD9AFA0994F749AA9FAD7 /* Karla-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B06E0CE397EE4E90B9C575DF /* Karla-ExtraLight.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-YouMontRealWay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-YouMontRealWay.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		25A6969EF3AC4BBCA1209238 /* Inter_18pt-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A3C558955684079ACA74D77 /* Inter_18pt-SemiBold.ttf */; };
+		399281DA894D4822842B15EB /* Karla-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0866056B7EC4BE6A480C1CA /* Karla-SemiBold.ttf */; };
+		5702FFC32A764379A1BB6C21 /* Inter_18pt-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 290602298713461685EF39B5 /* Inter_18pt-Medium.ttf */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		85A7A135DAFA907FAC7567EE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		8B570A133D5944FBA9F89625 /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2066FDA54BDB48E6AF983D33 /* Karla-Bold.ttf */; };
+		8E80D784E68C48338EB0A8DE /* Inter_18pt-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AF9D6A25C4D485089DDE519 /* Inter_18pt-Black.ttf */; };
+		93F4E6B0A3ED482A813C3C16 /* Inter_18pt-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5128B74A3C1A48E2BB0ED5B3 /* Inter_18pt-ExtraLight.ttf */; };
+		A50C427C3104467EB763DAAA /* Karla-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD2D4D81EA7740D5992F0A59 /* Karla-Regular.ttf */; };
+		B83A731F63D244B39E72937D /* Inter_18pt-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E3030C16625446EA070B8CA /* Inter_18pt-ExtraBold.ttf */; };
+		D49DACB201EC4E2C90A73EAB /* Inter_18pt-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 280B9F9A94064016B31C00B2 /* Inter_18pt-Light.ttf */; };
+		D5680079664C4CFDBDED38CA /* Inter_18pt-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9DF1B13A86B4963ADF919D5 /* Inter_18pt-Thin.ttf */; };
+		DB619B950249482FA3E8091B /* Inter_18pt-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 265B8742357941ADB76AED5B /* Inter_18pt-Bold.ttf */; };
+		E36691E2DC16483E8C8290AF /* Karla-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27A5BA6E2E4E4182A244EC4A /* Karla-ExtraBold.ttf */; };
+		F84C094C7EDD4BFBA5D5435A /* Inter_18pt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70F10E7A0A404630A97AB180 /* Inter_18pt-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0AF9D6A25C4D485089DDE519 /* Inter_18pt-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter_18pt-Black.ttf"; path = "../src/assets/fonts/Inter_18pt-Black.ttf"; sourceTree = "<group>"; };
+		0E3030C16625446EA070B8CA /* Inter_18pt-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter_18pt-ExtraBold.ttf"; path = "../src/assets/fonts/Inter_18pt-ExtraBold.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* YouMontRealWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouMontRealWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = YouMontRealWay/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = YouMontRealWay/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = YouMontRealWay/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2066FDA54BDB48E6AF983D33 /* Karla-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-Bold.ttf"; path = "../src/assets/fonts/Karla-Bold.ttf"; sourceTree = "<group>"; };
+		265B8742357941ADB76AED5B /* Inter_18pt-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter_18pt-Bold.ttf"; path = "../src/assets/fonts/Inter_18pt-Bold.ttf"; sourceTree = "<group>"; };
+		27A5BA6E2E4E4182A244EC4A /* Karla-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-ExtraBold.ttf"; path = "../src/assets/fonts/Karla-ExtraBold.ttf"; sourceTree = "<group>"; };
+		280B9F9A94064016B31C00B2 /* Inter_18pt-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter_18pt-Light.ttf"; path = "../src/assets/fonts/Inter_18pt-Light.ttf"; sourceTree = "<group>"; };
+		290602298713461685EF39B5 /* Inter_18pt-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter_18pt-Medium.ttf"; path = "../src/assets/fonts/Inter_18pt-Medium.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-YouMontRealWay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouMontRealWay.debug.xcconfig"; path = "Target Support Files/Pods-YouMontRealWay/Pods-YouMontRealWay.debug.xcconfig"; sourceTree = "<group>"; };
+		5128B74A3C1A48E2BB0ED5B3 /* Inter_18pt-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter_18pt-ExtraLight.ttf"; path = "../src/assets/fonts/Inter_18pt-ExtraLight.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-YouMontRealWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouMontRealWay.release.xcconfig"; path = "Target Support Files/Pods-YouMontRealWay/Pods-YouMontRealWay.release.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-YouMontRealWay.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YouMontRealWay.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A3C558955684079ACA74D77 /* Inter_18pt-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter_18pt-SemiBold.ttf"; path = "../src/assets/fonts/Inter_18pt-SemiBold.ttf"; sourceTree = "<group>"; };
+		70F10E7A0A404630A97AB180 /* Inter_18pt-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter_18pt-Regular.ttf"; path = "../src/assets/fonts/Inter_18pt-Regular.ttf"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = YouMontRealWay/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = YouMontRealWay/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B06E0CE397EE4E90B9C575DF /* Karla-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-ExtraLight.ttf"; path = "../src/assets/fonts/Karla-ExtraLight.ttf"; sourceTree = "<group>"; };
+		BD2D4D81EA7740D5992F0A59 /* Karla-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-Regular.ttf"; path = "../src/assets/fonts/Karla-Regular.ttf"; sourceTree = "<group>"; };
+		C9DF1B13A86B4963ADF919D5 /* Inter_18pt-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter_18pt-Thin.ttf"; path = "../src/assets/fonts/Inter_18pt-Thin.ttf"; sourceTree = "<group>"; };
+		E0866056B7EC4BE6A480C1CA /* Karla-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Karla-SemiBold.ttf"; path = "../src/assets/fonts/Karla-SemiBold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -39,6 +67,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		089B8497DB0B42E890750778 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0AF9D6A25C4D485089DDE519 /* Inter_18pt-Black.ttf */,
+				265B8742357941ADB76AED5B /* Inter_18pt-Bold.ttf */,
+				0E3030C16625446EA070B8CA /* Inter_18pt-ExtraBold.ttf */,
+				5128B74A3C1A48E2BB0ED5B3 /* Inter_18pt-ExtraLight.ttf */,
+				280B9F9A94064016B31C00B2 /* Inter_18pt-Light.ttf */,
+				290602298713461685EF39B5 /* Inter_18pt-Medium.ttf */,
+				70F10E7A0A404630A97AB180 /* Inter_18pt-Regular.ttf */,
+				6A3C558955684079ACA74D77 /* Inter_18pt-SemiBold.ttf */,
+				C9DF1B13A86B4963ADF919D5 /* Inter_18pt-Thin.ttf */,
+				2066FDA54BDB48E6AF983D33 /* Karla-Bold.ttf */,
+				27A5BA6E2E4E4182A244EC4A /* Karla-ExtraBold.ttf */,
+				B06E0CE397EE4E90B9C575DF /* Karla-ExtraLight.ttf */,
+				BD2D4D81EA7740D5992F0A59 /* Karla-Regular.ttf */,
+				E0866056B7EC4BE6A480C1CA /* Karla-SemiBold.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* YouMontRealWay */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +125,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				089B8497DB0B42E890750778 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -161,6 +212,20 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				85A7A135DAFA907FAC7567EE /* PrivacyInfo.xcprivacy in Resources */,
+				8E80D784E68C48338EB0A8DE /* Inter_18pt-Black.ttf in Resources */,
+				DB619B950249482FA3E8091B /* Inter_18pt-Bold.ttf in Resources */,
+				B83A731F63D244B39E72937D /* Inter_18pt-ExtraBold.ttf in Resources */,
+				93F4E6B0A3ED482A813C3C16 /* Inter_18pt-ExtraLight.ttf in Resources */,
+				D49DACB201EC4E2C90A73EAB /* Inter_18pt-Light.ttf in Resources */,
+				5702FFC32A764379A1BB6C21 /* Inter_18pt-Medium.ttf in Resources */,
+				F84C094C7EDD4BFBA5D5435A /* Inter_18pt-Regular.ttf in Resources */,
+				25A6969EF3AC4BBCA1209238 /* Inter_18pt-SemiBold.ttf in Resources */,
+				D5680079664C4CFDBDED38CA /* Inter_18pt-Thin.ttf in Resources */,
+				8B570A133D5944FBA9F89625 /* Karla-Bold.ttf in Resources */,
+				E36691E2DC16483E8C8290AF /* Karla-ExtraBold.ttf in Resources */,
+				020DD9AFA0994F749AA9FAD7 /* Karla-ExtraLight.ttf in Resources */,
+				A50C427C3104467EB763DAAA /* Karla-Regular.ttf in Resources */,
+				399281DA894D4822842B15EB /* Karla-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
