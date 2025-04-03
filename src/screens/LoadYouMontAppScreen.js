@@ -1,10 +1,12 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState, useRef } from 'react';
 import { Dimensions, Image, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-const LoadingNeshineScreen = ({ setSelectedNeshineScreen }) => {
+const LoadYouMontAppScreen = ({ setSelectedNeshineScreen }) => {
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
-  // Central images (do not include the star image here)
+  const navigation = useNavigation();
+
   const images = [
     require('../assets/images/starImage.png'),
     require('../assets/images/neshineLoadImage1.png'),
@@ -17,11 +19,11 @@ const LoadingNeshineScreen = ({ setSelectedNeshineScreen }) => {
 
 
   useEffect(() => {
+    setTimeout(() => {
+      navigation.replace('Home');
+    }, 3000)
+  }, []);
 
-    if (starFinished && currentImageIndex === images.length) {
-      setSelectedNeshineScreen('Home');
-    }
-  }, [starFinished, currentImageIndex]);
   const starAnimation = {
     from: { translateY: -dimensions.height * 0.5, rotate: '0deg' },
     to: { translateY: dimensions.height * 1.2, rotate: '720deg' },
@@ -55,52 +57,29 @@ const LoadingNeshineScreen = ({ setSelectedNeshineScreen }) => {
 
   return (
     <View style={{
-      flex: 1,
+      backgroundColor: '#160002',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'transparent',
+      flex: 1,
       width: '100%',
       zIndex: 1,
     }}>
-      {starFinished && currentImageIndex < images.length && (
-        <Animatable.Image
-          ref={imageRef}
-          key={currentImageIndex} 
-          source={images[currentImageIndex]}
-          style={{
-            width: currentImageIndex === 0 ? dimensions.width * 0.4 : dimensions.width * 0.61,
-            height: currentImageIndex === 0 ? dimensions.width * 0.4 : dimensions.width * 0.61,
-            borderRadius: dimensions.width * 0.037,
-            alignSelf: 'center',
-          }}
-          resizeMode="contain"
-        />
-      )}
-
-      <Animatable.View
-        ref={starRef}
-        animation={starAnimation}
-        duration={2000}
-        easing="linear"
-        onAnimationEnd={onStarAnimationEnd}
+      <Animatable.Image
+        source={require('../assets/images/loadYouMontImage.png')}
         style={{
-          position: 'absolute',
-          top: 0,
-          left: dimensions.width * 0.42,
-          zIndex: 3,
+          width: dimensions.height * 0.15,
+          height: dimensions.height * 0.15,
         }}
-      >
-        <Image
-          source={require('../assets/images/starImage.png')}
-          style={{
-            width: dimensions.width * 0.16,
-            height: dimensions.width * 0.16,
-          }}
-          resizeMode="contain"
-        />
-      </Animatable.View>
+        resizeMode="contain"
+        animation={{
+          from: { rotate: '0deg' },
+          to: { rotate: '1080deg' }, // Three full clockwise rotations
+        }}
+        duration={3000}
+        easing="linear"
+      />
     </View>
   );
 };
 
-export default LoadingNeshineScreen;
+export default LoadYouMontAppScreen;

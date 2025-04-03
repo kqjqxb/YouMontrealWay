@@ -12,7 +12,7 @@ import { UserProvider, UserContext } from './src/context/UserContext';
 import { Provider, useDispatch } from 'react-redux';
 import store from './src/redux/store';
 import { loadUserData } from './src/redux/userSlice';
-import LoadingNeshineScreen from './src/screens/LoadingNeshineScreen';
+import LoadYouMontAppScreen from './src/screens/LoadYouMontAppScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -83,10 +83,10 @@ const AppNavigator = () => {
 
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName={isNeshineOnboardNevWasVisible ? 'OnboardingScreen' : 'Home'}>
+        <Stack.Navigator initialRouteName={isNeshineOnboardNevWasVisible ? 'OnboardingScreen' : 'LoadYouMontApp'}>
           <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
           <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="LoadingNeshineApp" component={LoadingNeshineScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="LoadYouMontApp" component={LoadYouMontAppScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
     </NavigationContainer>
   );
