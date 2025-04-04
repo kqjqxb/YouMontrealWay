@@ -9,7 +9,7 @@ workflows:
       vars:
         XCODE_WORKSPACE: "YouMontRealWay.xcworkspace" # <----
         XCODE_SCHEME: "YouMontRealWay" # <----
-        BUNDLE_ID: "com.you.montreal.way.app" # <----
+        BUNDLE_ID: "com.you.montrealway.app" # <----
         APP_STORE_APP_ID: 6743625816 # <----
         APP_STORE_CONNECT_KEY_ID: "Y25AC5NMK7" # <----
         APP_STORE_CONNECT_ISSUER_ID: "25dcb2f4-2745-446f-b61b-07aae0562ab2" # <----

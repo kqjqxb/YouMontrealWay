@@ -17,7 +17,7 @@ import LoadYouMontAppScreen from './src/screens/LoadYouMontAppScreen';
 
 const Stack = createNativeStackNavigator();
 
-const NeshineStack = () => {
+const YouMontRealStask = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider store={store}>
@@ -33,42 +33,42 @@ const NeshineStack = () => {
 
 const AppNavigator = () => {
   const dispatch = useDispatch();
-  const [isNeshineOnboardNevWasVisible, setIsNeshineOnboardNevWasVisible] = useState(false);
+  const [isMontOnboardingRealVisibled, setMontOnboardingRealVisibled] = useState(false);
   const { user, setUser } = useContext(UserContext);
 
-  const [initializingNeshineNevsehirApp, setInitializingNeshineNevsehirApp] = useState(true);
+  const [initializingMontOnboardingRealApp, setInitializingMontOnboardingRealApp] = useState(true);
 
   useEffect(() => {
     dispatch(loadUserData());
   }, [dispatch]);
 
   useEffect(() => {
-    const loadNeshineNevsehirUser = async () => {
+    const loadMontOnboardingRealUser = async () => {
       try {
         const deviceId = await DeviceInfo.getUniqueId();
         const storageKey = `currentUser_${deviceId}`;
-        const storedNeshineNevsehirUser = await AsyncStorage.getItem(storageKey);
-        const isNeshineNevsehirOnboardingVisible = await AsyncStorage.getItem('isNeshineNevsehirOnboardingVisible');
+        const storedMontOnboardingRealUser = await AsyncStorage.getItem(storageKey);
+        const isMontOnboardingRealVisible = await AsyncStorage.getItem('isMontOnboardingRealVisible');
 
-        if (storedNeshineNevsehirUser) {
-          setUser(JSON.parse(storedNeshineNevsehirUser));
-          setIsNeshineOnboardNevWasVisible(false);
-        } else if (isNeshineNevsehirOnboardingVisible) {
-          setIsNeshineOnboardNevWasVisible(false);
+        if (storedMontOnboardingRealUser) {
+          setUser(JSON.parse(storedMontOnboardingRealUser));
+          setMontOnboardingRealVisibled(false);
+        } else if (isMontOnboardingRealVisible) {
+          setMontOnboardingRealVisibled(false);
         } else {
-          setIsNeshineOnboardNevWasVisible(true);
-          await AsyncStorage.setItem('isNeshineNevsehirOnboardingVisible', 'true');
+          setMontOnboardingRealVisibled(true);
+          await AsyncStorage.setItem('isMontOnboardingRealVisible', 'true');
         }
       } catch (error) {
-        console.error('Error loading of neshine user', error);
+        console.error('Error loading of montYou Real user', error);
       } finally {
-        setInitializingNeshineNevsehirApp(false);
+        setInitializingMontOnboardingRealApp(false);
       }
     };
-    loadNeshineNevsehirUser();
+    loadMontOnboardingRealUser();
   }, [setUser]);
 
-  if (initializingNeshineNevsehirApp) {
+  if (initializingMontOnboardingRealApp) {
     return (
       <View style={{
         justifyContent: 'center',
@@ -83,9 +83,9 @@ const AppNavigator = () => {
 
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName={isNeshineOnboardNevWasVisible ? 'OnboardingScreen' : 'LoadYouMontApp'}>
+        <Stack.Navigator initialRouteName={isMontOnboardingRealVisibled ? 'MontOnboardingScreen' : 'LoadYouMontApp'}>
           <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="MontOnboardingScreen" component={OnboardingScreen} options={{ headerShown: false }} />
           <Stack.Screen name="LoadYouMontApp" component={LoadYouMontAppScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
     </NavigationContainer>
@@ -93,4 +93,4 @@ const AppNavigator = () => {
 };
 
 
-export default NeshineStack;
+export default YouMontRealStask;

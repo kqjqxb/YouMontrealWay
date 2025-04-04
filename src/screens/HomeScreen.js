@@ -6,32 +6,28 @@ import {
   Image,
   Dimensions,
   SafeAreaView,
-  Share,
-  TouchableWithoutFeedback,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import LinearGradient from 'react-native-linear-gradient';
-import NeshineFavouritesScreen from './NeshineFavouritesScreen';
-import NeshineMapScreen from './NeshineMapScreen';
+import MontFavouritesRealScreen from './MontFavouritesRealScreen';
+import YouMontAboutApp from './YouMontAboutApp';
 
-import mysticWondersData from '../components/mysticWondersData';
-import goldenHeritageData from '../components/goldenHeritageData';
-import sunsetSerenityData from '../components/sunsetSerenityData';
-import localDelightsData from '../components/localDelightsData';
-import Loader from '../components/Loader';
-import GalleryScreen from './GalleryScreen';
-import NeshineBlogScreen from './NeshineBlogScreen';
-import WelcomePageScreen from './WelcomePageScreen';
-import NeshineQuizzScreen from './NeshineQuizzScreen';
+import ecoShopsYouMontData from '../components/ecoShopsYouMontData';
+import popularYouMontData from '../components/popularYouMontData';
+import sortingPointsYouMontData from '../components/sortingPointsYouMontData';
+import montCafeRealData from '../components/montCafeRealData';
+import MontFamousPlacesScreen from './MontFamousPlacesScreen';
 import { CalendarIcon } from 'react-native-heroicons/solid';
 import MapView, { Marker } from 'react-native-maps';
 import { ArrowLeftIcon, ShareIcon } from 'react-native-heroicons/outline';
+import PlaceCardComponent from '../components/PlaceCardComponent';
 
-const allCulinaryRestaurantsData = [...goldenHeritageData, ...mysticWondersData, ...sunsetSerenityData, ...localDelightsData];
+import interestingMontFactsData from '../components/interestingMontFactsData';
 
 const fontInterRegular = 'Inter-Regular';
+const fullMontRealPlacesData = [...popularYouMontData, ...ecoShopsYouMontData, ...sortingPointsYouMontData, ...montCafeRealData];
 
-const bottomBtns = [
+
+const montRealButtons = [
   {
     id: 1,
     screen: 'Home',
@@ -39,115 +35,133 @@ const bottomBtns = [
   },
   {
     id: 2,
-    screen: 'NeshineFavorites',
+    screen: 'FamousPlaces',
     youIconMont: require('../assets/icons/youHomeMontIcons/youMontPlacesIcon.png'),
+    youMontTitle: 'MORE FAMOUS PLACES',
   },
   {
     id: 3,
-    screen: 'NeshineMap',
+    screen: 'YouMontAboutApp',
     youIconMont: require('../assets/icons/youHomeMontIcons/youMontInfoIcon.png'),
+    youMontTitle: 'ABOUT APP',
   },
   {
     id: 4,
-    screen: 'NeshineFavorites',
+    screen: 'MontRealFavorites',
     youIconMont: require('../assets/icons/youHomeMontIcons/youMontFavIcon.png'),
+    youMontTitle: 'FAVORITE PLACES',
   },
 ]
 
 const HomeScreen = () => {
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
-  const [selectedNeshineScreen, setSelectedNeshineScreen] = useState('Home');
-  const [savedNeshinePlaces, setSavedNeshinePlaces] = useState([]);
-  const [isNeshineMapPlaceVisible, setIsNeshineMapPlaceVisible] = useState(false);
-  const [selectedNeshinePlace, setSelectedNeshinePlace] = useState(null);
+  const [selectedMontRealScreen, setSelectedMontRealScreen] = useState('Home');
+  const [savedMontPlacesReal, setSavedMontPlacesReal] = useState([]);
+  const [isMontMapRealPlaceVisible, setMontMapRealPlaceVisible] = useState(false);
+  const [selectedMontRealPlace, setSelectedMontRealPlace] = useState(null);
 
   const [isFullMapVisible, setIsFullMapVisible] = useState(false);
+  const [factIndex, setFactIndex] = useState(1);
 
-
-  const loadCulinaryRestaurats = async () => {
+  const loadMontSavedPlaces = async () => {
     try {
-      const storedNeshinePlaces = await AsyncStorage.getItem('savedNeshinePlaces');
-      const parsedNeshinePlaces = storedNeshinePlaces ? JSON.parse(storedNeshinePlaces) : [];
-      setSavedNeshinePlaces(parsedNeshinePlaces);
+      const storedMontSavedPlaces = await AsyncStorage.getItem('savedMontPlacesReal');
+      const parsedMontSavedPlaces = storedMontSavedPlaces ? JSON.parse(storedMontSavedPlaces) : [];
+      setSavedMontPlacesReal(parsedMontSavedPlaces);
     } catch (error) {
-      console.error('Error loading savedNeshinePlaces:', error);
+      console.error('Error loading savedMontPlacesReal:', error);
+    }
+  };
+
+  const updateDayFact = async () => {
+    try {
+      const storedFact = await AsyncStorage.getItem('dayFact');
+      const today = new Date().toISOString().slice(0, 10);
+      let factData = storedFact ? JSON.parse(storedFact) : null;
+      if (!factData) {
+        factData = { lastDate: today, factIndex: 1 };
+        await AsyncStorage.setItem('dayFact', JSON.stringify(factData));
+        setFactIndex(1);
+      } else {
+        if (factData.lastDate !== today) {
+          const newIndex = (factData.factIndex % 28) + 1;
+          factData = { lastDate: today, factIndex: newIndex };
+          await AsyncStorage.setItem('dayFact', JSON.stringify(factData));
+          setFactIndex(newIndex);
+        } else {
+          setFactIndex(factData.factIndex);
+        }
+      }
+    } catch (error) {
+      console.error('Error updating day fact:', error);
     }
   };
 
   useEffect(() => {
-    loadCulinaryRestaurats();
+    loadMontSavedPlaces();
+    updateDayFact();
   }, []);
-
-  const isNeshinePlaceSaved = (shinePlace) => {
-    return savedNeshinePlaces.some((nPlace) => nPlace.id === shinePlace?.id);
-  };
-
-  const saveNeshinePlace = async (neshinePlace) => {
-    try {
-      const savedNeshinePlace = await AsyncStorage.getItem('savedNeshinePlaces');
-      const parsedNeshinePlaces = savedNeshinePlace ? JSON.parse(savedNeshinePlace) : [];
-
-      const thisShinePlaceIndex = parsedNeshinePlaces.findIndex((r) => r.id === neshinePlace.id);
-
-      if (thisShinePlaceIndex === -1) {
-        const updatedShinePlaces = [neshinePlace, ...parsedNeshinePlaces];
-        await AsyncStorage.setItem('savedNeshinePlaces', JSON.stringify(updatedShinePlaces));
-        setSavedNeshinePlaces(updatedShinePlaces);
-      } else {
-        const updatedShinePlaces = parsedNeshinePlaces.filter((r) => r.id !== neshinePlace.id);
-        await AsyncStorage.setItem('savedNeshinePlaces', JSON.stringify(updatedShinePlaces));
-        setSavedNeshinePlaces(updatedShinePlaces);
-      }
-    } catch (error) {
-      console.error('error of save/delete shine place:', error);
-    }
-  };
-
-  const shareNeshinePlace = async (title) => {
-    try {
-      await Share.share({
-        message: `Let's go to the restaurant ${title}! I found it on the NeShine - Nevşehir Shine!`,
-      });
-    } catch (error) {
-      console.error('Error share:', error);
-    }
-  };
 
   return (
     <View style={{
       backgroundColor: '#160002',
       width: '100%',
-      flex: 1,
       height: dimensions.height,
+      flex: 1,
     }}>
       <View style={{
-        width: dimensions.width,
         backgroundColor: '#2D1304',
         alignItems: 'center',
+        height: dimensions.height * 0.18,
         alignSelf: 'center',
         justifyContent: 'center',
-        height: dimensions.height * 0.18,
+        width: dimensions.width,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: dimensions.height * 0.01,
+        },
+        shadowOpacity: 0.4,
+        shadowRadius: dimensions.width * 0.01,
+        elevation: 1,
       }}>
         <SafeAreaView style={{
-          flex: 1,
-          alignItems: 'center',
           justifyContent: 'center',
+          alignItems: 'center',
+          flex: 1,
         }}>
-          <Image
-            source={require('../assets/images/youMontUpImage.png')}
-            style={{
-              width: dimensions.width * 0.8,
-              height: dimensions.height * 0.1,
-              top: -dimensions.height * 0.01,
-              alignSelf: 'center',
-            }}
-            resizeMode='contain'
-          />
+          {selectedMontRealScreen === 'Home' ? (
+            <Image
+              source={require('../assets/images/youMontUpImage.png')}
+              style={{
+                width: dimensions.width * 0.8,
+                height: dimensions.height * 0.1,
+                top: -dimensions.height * 0.01,
+                alignSelf: 'center',
+              }}
+              resizeMode='contain'
+            />
+          ) : (
+            <Text
+              style={{
+                top: -dimensions.height * 0.01,
+                textAlign: "left",
+                alignSelf: 'flex-start',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                fontFamily: fontInterRegular,
+                fontSize: dimensions.width * 0.07,
+                paddingHorizontal: dimensions.width * 0.04,
+                color: 'white',
+              }}
+            >
+              {selectedMontRealScreen === 'FamousPlaces' ? 'MORE FAMOUS PLACES' : selectedMontRealScreen === 'YouMontAboutApp' ? 'ABOUT APP' : selectedMontRealScreen === 'MontRealFavorites' ? 'FAVORITE PLACES' : ''}
+            </Text>
+          )}
         </SafeAreaView>
-
       </View>
 
-      {selectedNeshineScreen === 'Home' ? (
+      {selectedMontRealScreen === 'Home' ? (
         <SafeAreaView style={{
           flex: 1,
           paddingHorizontal: dimensions.width * 0.05,
@@ -158,6 +172,7 @@ const HomeScreen = () => {
               <Text
                 style={{
                   fontSize: dimensions.width * 0.05,
+                  paddingHorizontal: dimensions.width * 0.04,
                   textAlign: "left",
                   alignSelf: 'flex-start',
                   fontWeight: 600,
@@ -165,24 +180,23 @@ const HomeScreen = () => {
                   fontFamily: fontInterRegular,
                   textTransform: 'uppercase',
                   marginTop: dimensions.height * 0.01,
-                  paddingHorizontal: dimensions.width * 0.04,
                 }}
               >
                 Interesting facts for every day
               </Text>
 
               <View style={{
-                width: dimensions.width * 0.92,
+                height: dimensions.height * 0.12,
                 alignSelf: 'center',
                 marginTop: dimensions.height * 0.02,
-                alignItems: 'center',
+                backgroundColor: '#A53319',
                 justifyContent: 'space-between',
                 paddingHorizontal: dimensions.width * 0.03,
                 flexDirection: 'row',
-                backgroundColor: '#A53319',
+                width: dimensions.width * 0.92,
                 borderRadius: dimensions.width * 0.055,
                 paddingVertical: dimensions.height * 0.01,
-                height: dimensions.height * 0.12,
+                alignItems: 'center',
               }}>
                 <Text
                   style={{
@@ -195,47 +209,47 @@ const HomeScreen = () => {
                     maxWidth: dimensions.width * 0.6,
                   }}
                 >
-                  Montreal is the second largest French-speaking city in the world after Paris.
+                  {interestingMontFactsData.find(item => item.id === factIndex)?.montText}
                 </Text>
 
                 <View style={{
-                  width: dimensions.width * 0.23,
+                  flexDirection: 'row',
+                  justifyContent: 'center',
                   height: dimensions.height * 0.05,
                   backgroundColor: '#160002',
                   borderRadius: dimensions.width * 0.03,
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'row',
+                  width: dimensions.width * 0.23,
                 }}>
                   <CalendarIcon size={dimensions.height * 0.025} color='white' />
                   <Text
                     style={{
-                      fontSize: dimensions.width * 0.037,
+                      marginLeft: dimensions.width * 0.01,
                       textAlign: "left",
                       fontWeight: 700,
                       color: 'white',
                       fontFamily: fontInterRegular,
-                      textTransform: 'uppercase',
+                      fontSize: dimensions.width * 0.037,
                       maxWidth: dimensions.width * 0.6,
-                      marginLeft: dimensions.width * 0.01,
+                      textTransform: 'uppercase',
                     }}
                   >
-                    Day: 1
+                    Day: {factIndex}
                   </Text>
                 </View>
               </View>
 
               <Text
                 style={{
-                  fontSize: dimensions.width * 0.05,
+                  paddingHorizontal: dimensions.width * 0.04,
                   textAlign: "left",
-                  alignSelf: 'flex-start',
+                  textTransform: 'uppercase',
                   fontWeight: 600,
                   color: 'white',
                   fontFamily: fontInterRegular,
-                  textTransform: 'uppercase',
+                  fontSize: dimensions.width * 0.05,
+                  alignSelf: 'flex-start',
                   marginTop: dimensions.height * 0.03,
-                  paddingHorizontal: dimensions.width * 0.04,
                 }}
               >
                 Map Montreal
@@ -243,22 +257,22 @@ const HomeScreen = () => {
 
               <MapView
                 style={{
-                  width: dimensions.width * 0.92,
-                  borderRadius: dimensions.width * 0.055,
-                  height: dimensions.height * 0.3,
-                  alignSelf: 'center',
                   marginTop: dimensions.height * 0.01,
-                  zIndex: 50
+                  borderRadius: dimensions.width * 0.055,
+                  zIndex: 50,
+                  alignSelf: 'center',
+                  height: dimensions.height * 0.3,
+                  width: dimensions.width * 0.92,
                 }}
                 region={{
-                  latitude: allCulinaryRestaurantsData[0].coordinates.latitude,
-                  longitude: allCulinaryRestaurantsData[0].coordinates.longitude,
+                  latitude: fullMontRealPlacesData[1].coordinates.latitude,
+                  longitude: fullMontRealPlacesData[1].coordinates.longitude,
                   latitudeDelta: 0.01,
                   longitudeDelta: 0.01,
                 }}
               >
 
-                {allCulinaryRestaurantsData.map((location, index) => (
+                {fullMontRealPlacesData.map((location, index) => (
                   <Marker
                     key={index}
                     coordinate={location.coordinates}
@@ -274,14 +288,14 @@ const HomeScreen = () => {
                   setIsFullMapVisible(true);
                 }}
                 style={{
+                  alignItems: 'center',
                   width: dimensions.width * 0.92,
-                  height: dimensions.height * 0.07,
+                  marginTop: dimensions.height * 0.015,
                   backgroundColor: '#A53319',
                   borderRadius: dimensions.width * 0.05,
                   alignSelf: 'center',
                   justifyContent: 'center',
-                  alignItems: 'center',
-                  marginTop: dimensions.height * 0.015,
+                  height: dimensions.height * 0.07,
                 }}>
                 <Text
                   style={{
@@ -301,27 +315,27 @@ const HomeScreen = () => {
             <>
               <TouchableOpacity
                 onPress={() => {
-                  // setIsFullMapVisible((prev) => !prev);
                   setIsFullMapVisible(false);
+                  setSelectedMontRealPlace(null);
                 }}
                 style={{
-                  flexDirection: 'row',
-                  alignSelf: 'flex-start',
+                  marginTop: dimensions.height * 0.015,
                   alignItems: 'center',
                   justifyContent: 'center',
                   marginLeft: dimensions.width * 0.04,
-                  marginTop: dimensions.height * 0.015,
+                  alignSelf: 'flex-start',
+                  flexDirection: 'row',
                 }}>
                 <ArrowLeftIcon size={dimensions.width * 0.07} color='white' />
                 <Text
                   style={{
-                    fontSize: dimensions.width * 0.045,
-                    textAlign: "center",
+                    marginLeft: dimensions.width * 0.025,
                     fontWeight: 700,
                     color: 'white',
                     fontFamily: fontInterRegular,
+                    textAlign: "center",
                     textTransform: 'uppercase',
-                    marginLeft: dimensions.width * 0.025,
+                    fontSize: dimensions.width * 0.045,
                   }}
                 >
                   Map Montreal
@@ -330,245 +344,100 @@ const HomeScreen = () => {
 
               <MapView
                 style={{
-                  width: dimensions.width * 0.92,
+                  zIndex: 0,
                   borderRadius: dimensions.width * 0.055,
-                  height: dimensions.height * 0.6,
                   alignSelf: 'center',
                   marginTop: dimensions.height * 0.01,
-                  zIndex: 0,
+                  width: dimensions.width * 0.92,
+                  height: dimensions.height * 0.6,
                 }}
                 region={{
-                  latitude: allCulinaryRestaurantsData[0].coordinates.latitude,
-                  longitude: allCulinaryRestaurantsData[0].coordinates.longitude,
                   latitudeDelta: 0.01,
+                  longitude: fullMontRealPlacesData[0].coordinates.longitude,
+                  latitude: fullMontRealPlacesData[0].coordinates.latitude,
                   longitudeDelta: 0.01,
                 }}
               >
 
-                {allCulinaryRestaurantsData.map((location, index) => (
+                {fullMontRealPlacesData.map((location, index) => (
                   <Marker
-                    key={index}
-                    coordinate={location.coordinates}
                     title={location.title}
+                    coordinate={location.coordinates}
                     description={location.description}
-                    pinColor={selectedNeshinePlace && location.coordinates === selectedNeshinePlace.coordinates ? "#181818" : "#A53319"}
+                    pinColor={selectedMontRealPlace && location.coordinates === selectedMontRealPlace.coordinates ? "#181818" : "#A53319"}
+                    key={index}
                     onPress={() => {
-                      setSelectedNeshinePlace(location);
-                      setIsNeshineMapPlaceVisible(true);
+                      setSelectedMontRealPlace(location);
+                      setMontMapRealPlaceVisible(true);
                     }}
                   />
                 ))}
               </MapView>
 
-              {selectedNeshinePlace && isNeshineMapPlaceVisible && (
+              {selectedMontRealPlace && isMontMapRealPlaceVisible && (
                 <View style={{
-                  width: dimensions.width * 0.9,
-                  alignSelf: 'center',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  paddingHorizontal: dimensions.width * 0.03,
-                  flexDirection: 'row',
-                  backgroundColor: '#2D1304',
-                  borderRadius: dimensions.width * 0.055,
-                  paddingVertical: dimensions.height * 0.01,
-                  height: dimensions.height * 0.2,
                   position: 'absolute',
-                  bottom: dimensions.height * 0.18,
+                  bottom: dimensions.height * 0.17,
                 }}>
-                  <Image
-                    source={require('../assets/images/neshinePlacesImages/galleryImage.png')}
-                    style={{
-                      width: dimensions.width * 0.35,
-                      height: dimensions.width * 0.35,
-                      borderRadius: dimensions.width * 0.03,
-                    }}
-                    resizeMode='cover'
-                  />
-
-                  <View style={{
-                    flex: 1,
-                    justifyContent: 'flex-start',
-                    alignItems: 'flex-start',
-                    height: dimensions.width * 0.35,
-                    marginLeft: dimensions.width * 0.03,
-                  }}>
-                    <Text
-                      style={{
-                        fontSize: dimensions.width * 0.045,
-                        textAlign: "left",
-                        fontWeight: 700,
-                        color: 'white',
-                        alignSelf: 'flex-start',
-                        fontFamily: fontInterRegular,
-                      }}
-                    >
-                      {selectedNeshinePlace?.title}
-                    </Text>
-
-                    <Text
-                      style={{
-                        fontSize: dimensions.width * 0.03,
-                        textAlign: "left",
-                        fontWeight: 400,
-                        color: 'white',
-                        fontFamily: fontInterRegular,
-                        marginTop: dimensions.height * 0.01,
-                      }}
-                    >
-                      {selectedNeshinePlace?.description}
-                    </Text>
-
-                    <View style={{
-                      flex: 1,
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      marginTop: dimensions.height * 0.01,
-                      width: dimensions.width * 0.45,
-                    }}>
-                      <TouchableOpacity
-                        onPress={() => {
-                          setIsNeshineMapPlaceVisible(false);
-                          setSelectedNeshinePlace(null);
-                        }}
-                        style={{
-                          width: dimensions.width * 0.18,
-                          height: dimensions.height * 0.05,
-                          backgroundColor: '#A53319',
-                          borderRadius: dimensions.width * 0.02,
-                          alignSelf: 'center',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                        }}>
-                        <Text
-                          style={{
-                            fontSize: dimensions.width * 0.04,
-                            textAlign: "center",
-                            fontWeight: 700,
-                            color: 'white',
-                            fontFamily: fontInterRegular,
-                          }}
-                        >
-                          Close
-                        </Text>
-                      </TouchableOpacity>
-
-                      <TouchableOpacity
-                        onPress={() => {
-                          saveNeshinePlace(selectedNeshinePlace);
-                        }}
-                        style={{
-                          width: dimensions.width * 0.115,
-                          height: dimensions.height * 0.05,
-                          backgroundColor: isNeshinePlaceSaved(selectedNeshinePlace) ? '#A53319' : 'transparent',
-                          borderRadius: dimensions.width * 0.02,
-                          alignSelf: 'center',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          borderColor: '#A53319',
-                          borderWidth: isNeshinePlaceSaved(selectedNeshinePlace) ? 0 : dimensions.width * 0.004,
-                        }}>
-                        <Image
-                          source={isNeshinePlaceSaved(selectedNeshinePlace)
-                            ? require('../assets/icons/youHomeMontIcons/youMontFavIcon.png')
-                            : require('../assets/icons/emptyHeartYouMontIcon.png')
-                          }
-                          style={{
-                            width: dimensions.width * 0.05,
-                            height: dimensions.width * 0.05,
-                          }}
-                          resizeMode='contain'
-                        />
-                      </TouchableOpacity>
-
-                      <TouchableOpacity
-                        onPress={() => {
-                          shareNeshinePlace(selectedNeshinePlace.title);
-                        }}
-                        style={{
-                          width: dimensions.width * 0.115,
-                          height: dimensions.height * 0.05,
-                          backgroundColor: 'transparent',
-                          borderColor: '#A53319',
-                          borderWidth: dimensions.width * 0.004,
-                          borderRadius: dimensions.width * 0.02,
-                          alignSelf: 'center',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                        }}>
-                        <Image
-                          source={require('../assets/icons/shareYouMontIcon.png')}
-                          style={{
-                            width: dimensions.width * 0.05,
-                            height: dimensions.width * 0.05,
-                          }}
-                          resizeMode='contain'
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  </View>
+                  <PlaceCardComponent props={selectedMontRealPlace} savedMontPlacesReal={savedMontPlacesReal} setSavedMontPlacesReal={setSavedMontPlacesReal} />
                 </View>
               )}
             </>
           )}
 
         </SafeAreaView>
-      ) : selectedNeshineScreen === 'NeshineFavorites' ? (
-        <NeshineFavouritesScreen setSelectedNeshineScreen={setSelectedNeshineScreen} setSelectedNeshinePlace={setSelectedNeshinePlace} savedNeshinePlaces={savedNeshinePlaces} setSavedNeshinePlaces={setSavedNeshinePlaces} setIsNeshineMapPlaceVisible={setIsNeshineMapPlaceVisible} />
-      ) : selectedNeshineScreen === 'NeshineMap' ? (
-        <NeshineMapScreen setSelectedNeshineScreen={setSelectedNeshineScreen} selectedNeshinePlace={selectedNeshinePlace} isNeshineMapPlaceVisible={isNeshineMapPlaceVisible} setIsNeshineMapPlaceVisible={setIsNeshineMapPlaceVisible} setSavedNeshinePlaces={setSavedNeshinePlaces} savedNeshinePlaces={savedNeshinePlaces} selectedNeshineScreen={selectedNeshineScreen} />
-      ) : selectedNeshineScreen === 'GalleryScreen' ? (
-        <GalleryScreen setSelectedNeshineScreen={setSelectedNeshineScreen} setSavedNeshinePlaces={setSavedNeshinePlaces} savedNeshinePlaces={savedNeshinePlaces} />
-      ) : selectedNeshineScreen === 'NeshineBlog' ? (
-        <NeshineBlogScreen setSelectedNeshineScreen={setSelectedNeshineScreen} setSavedNeshinePlaces={setSavedNeshinePlaces} savedNeshinePlaces={savedNeshinePlaces} />
-      ) : selectedNeshineScreen === 'WelcomePage' ? (
-        <WelcomePageScreen setSelectedNeshineScreen={setSelectedNeshineScreen} setSavedNeshinePlaces={setSavedNeshinePlaces} savedNeshinePlaces={savedNeshinePlaces} />
+      ) : selectedMontRealScreen === 'MontRealFavorites' ? (
+        <MontFavouritesRealScreen setSelectedMontRealScreen={setSelectedMontRealScreen} setSelectedMontRealPlace={setSelectedMontRealPlace} savedMontPlacesReal={savedMontPlacesReal} setSavedMontPlacesReal={setSavedMontPlacesReal} setMontMapRealPlaceVisible={setMontMapRealPlaceVisible} />
+      ) : selectedMontRealScreen === 'YouMontAboutApp' ? (
+        <YouMontAboutApp setSelectedMontRealScreen={setSelectedMontRealScreen} selectedMontRealPlace={selectedMontRealPlace} isMontMapRealPlaceVisible={isMontMapRealPlaceVisible} setMontMapRealPlaceVisible={setMontMapRealPlaceVisible} setSavedMontPlacesReal={setSavedMontPlacesReal} savedMontPlacesReal={savedMontPlacesReal} selectedMontRealScreen={selectedMontRealScreen} />
+      ) : selectedMontRealScreen === 'FamousPlaces' ? (
+        <MontFamousPlacesScreen setSelectedMontRealScreen={setSelectedMontRealScreen} setSavedMontPlacesReal={setSavedMontPlacesReal} savedMontPlacesReal={savedMontPlacesReal} />
       ) : null}
 
-      {selectedNeshineScreen !== 'LoadingNeshine' && (
-        <View
-          style={{
-            position: 'absolute',
-            bottom: dimensions.height * 0.03,
-            backgroundColor: '#2D1304',
-            height: dimensions.height * 0.1,
-            width: dimensions.width * 0.92,
-            borderColor: '#FDCC06',
-            paddingHorizontal: dimensions.width * 0.035,
-            borderRadius: dimensions.width * 0.04,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            alignSelf: 'center',
-            zIndex: 4444,
-          }}
-        >
-          {bottomBtns.map((button, index) => (
-            <TouchableOpacity
-              key={button.id}
-              onPress={() => setSelectedNeshineScreen(button.screen)}
+      <View
+        style={{
+          alignSelf: 'center',
+          bottom: dimensions.height * 0.03,
+          backgroundColor: '#2D1304',
+          height: dimensions.height * 0.1,
+          width: dimensions.width * 0.92,
+          justifyContent: 'space-between',
+          paddingHorizontal: dimensions.width * 0.035,
+          borderRadius: dimensions.width * 0.04,
+          flexDirection: 'row',
+          position: 'absolute',
+          alignItems: 'center',
+          zIndex: 4444,
+          borderColor: '#FDCC06',
+        }}
+      >
+        {montRealButtons.map((button, index) => (
+          <TouchableOpacity
+            key={button.id}
+            onPress={() => setSelectedMontRealScreen(button.screen)}
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: selectedMontRealScreen === button.screen ? '#A53319' : 'transparent',
+              width: dimensions.height * 0.07,
+              height: dimensions.height * 0.07,
+              borderRadius: dimensions.height * 0.015,
+            }}
+          >
+            <Image
+              source={button.youIconMont}
               style={{
-                justifyContent: 'center',
-                backgroundColor: selectedNeshineScreen === button.screen ? '#A53319' : 'transparent',
-                width: dimensions.height * 0.07,
-                height: dimensions.height * 0.07,
-                borderRadius: dimensions.height * 0.015,
-                alignItems: 'center',
+                textAlign: 'center',
+                
+                width: dimensions.height * 0.04,
+                height: dimensions.height * 0.04,
               }}
-            >
-              <Image
-                source={button.youIconMont}
-                style={{
-                  width: dimensions.height * 0.04,
-                  height: dimensions.height * 0.04,
-                  textAlign: 'center'
-                }}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-          ))}
-        </View>
-      )}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+        ))}
+      </View>
+
     </View>
   );
 };

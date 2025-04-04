@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, FlatList, Animated, Text, TouchableOpacity, Dimensions, Image, SafeAreaView } from 'react-native';
-import neshineOnboardingData from '../components/neshineOnboardingData';
+import youOnboardingMontRealData from '../components/youOnboardingMontRealData';
 import { useNavigation } from '@react-navigation/native';
 
 const fontInterRegular = 'Inter-Regular';
@@ -31,7 +31,7 @@ const OnboardingScreen = () => {
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
   const scrollToTheNextYouMontSlide = () => {
-    if (currentYouMontSlideIndex < neshineOnboardingData.length - 1) {
+    if (currentYouMontSlideIndex < youOnboardingMontRealData.length - 1) {
       slidesYouMontRef.current.scrollToIndex({ index: currentYouMontSlideIndex + 1 });
     } else {
       navigation.replace('Home');
@@ -42,23 +42,23 @@ const OnboardingScreen = () => {
   const renderYouMontItem = ({ item }) => (
     <SafeAreaView style={{ width: dimensions.width, flex: 1, justifyContent: 'space-between', alignItems: 'center' }} >
       <View style={{
-        marginTop: dimensions.height * 0.08,
+        zIndex: 1,
         width: dimensions.width * 0.92,
         alignSelf: 'flex-start',
         alignItems: 'center',
-        zIndex: 1,
+        marginTop: dimensions.height * 0.08,
       }}>
         <Text
           style={{
-            textAlign: 'left',
-            fontSize: dimensions.width * 0.075,
+            paddingHorizontal: dimensions.width * 0.04,
             fontFamily: fontInterRegular,
             fontWeight: 700,
             color: 'white',
             maxWidth: dimensions.width * 0.9,
             alignSelf: 'flex-start',
-            paddingHorizontal: dimensions.width * 0.04,
+            fontSize: dimensions.width * 0.075,
             marginTop: dimensions.height * 0.03,
+            textAlign: 'left',
           }}>
           {item.title}
         </Text>
@@ -66,11 +66,14 @@ const OnboardingScreen = () => {
           style={{
             fontWeight: 400,
             marginTop: dimensions.height * 0.03,
+
             textAlign: 'left',
             alignSelf: 'flex-start',
             fontFamily: fontInterRegular,
+
             color: '#fff',
             fontSize: dimensions.width * 0.05,
+
             paddingHorizontal: dimensions.width * 0.04,
           }}>
           {item.description}
@@ -92,9 +95,9 @@ const OnboardingScreen = () => {
           <Image
             source={require(`../assets/images/youOnbImage.png`)}
             style={{
+              width: dimensions.width * 0.75,
               marginRight: dimensions.width * 0.04,
               height: dimensions.height * 0.35,
-              width: dimensions.width * 0.75,
               alignSelf: 'center',
             }}
             resizeMode="contain"
@@ -102,12 +105,12 @@ const OnboardingScreen = () => {
         </View>
 
         <FlatList
-          renderItem={renderYouMontItem}
-          horizontal
-          data={neshineOnboardingData}
           pagingEnabled
+          data={youOnboardingMontRealData}
+          horizontal
           showsHorizontalScrollIndicator={false}
           bounces={false}
+          renderItem={renderYouMontItem}
           keyExtractor={(item) => item.id.toString()}
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollYouMontX } } }], {
             useNativeDriver: false,
@@ -121,31 +124,31 @@ const OnboardingScreen = () => {
 
       <TouchableOpacity
         onPress={() => {
-          if (currentYouMontSlideIndex === neshineOnboardingData.length - 1) {
-            navigation.replace('LoadingNeshineApp');
+          if (currentYouMontSlideIndex === youOnboardingMontRealData.length - 1) {
+            navigation.replace('LoadYouMontApp');
           } else scrollToTheNextYouMontSlide();
         }}
         style={{
-          marginLeft: dimensions.width * 0.04,
+          bottom: dimensions.height * 0.15,
           borderRadius: dimensions.width * 0.055,
           width: dimensions.width * 0.5,
+          height: dimensions.height * 0.08,
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: '#A53319',
-          bottom: dimensions.height * 0.15,
           alignSelf: 'flex-start',
-          height: dimensions.height * 0.08,
+          marginLeft: dimensions.width * 0.04,
         }}
       >
         <Text
           style={{
-            fontWeight: 700,
-            color: '#fff',
             textAlign: 'center',
-            fontSize: dimensions.width * 0.05,
+            fontWeight: 700,
             fontFamily: fontInterRegular,
+            fontSize: dimensions.width * 0.05,
+            color: '#fff',
           }}>
-          {currentYouMontSlideIndex === neshineOnboardingData.length - 1 ? 'Start' : currentYouMontSlideIndex === 1 ? 'Go next' : 'Next'}
+          {currentYouMontSlideIndex === youOnboardingMontRealData.length - 1 ? 'Start' : currentYouMontSlideIndex === 1 ? 'Go next' : 'Next'}
         </Text>
       </TouchableOpacity>
     </SafeAreaView>

@@ -1,8 +1,8 @@
 import React from 'react';
-import NeshineStack from './StackNavigator';
+import YouMontRealStask from './StackNavigator';
 
 function App() {
-  return <NeshineStack />;
+  return <YouMontRealStask />;
 }
 
 export default App;
