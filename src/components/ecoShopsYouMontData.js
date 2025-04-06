@@ -8,7 +8,7 @@ export default [
             longitude: -73.6148,
         },
         image: require('../assets/images/montRealDataImages/youEcoImages/youEcoImage1.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLinkLOCO',
+        montRealMapLink: 'https://maps.app.goo.gl/Kji5YtrhZizt76uW8',
     },
     {
         id: 7,
@@ -19,7 +19,7 @@ export default [
             longitude: -73.5391,
         },
         image: require('../assets/images/montRealDataImages/youEcoImages/youEcoImage2.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLinkMegaVrac',
+        montRealMapLink: 'https://maps.app.goo.gl/qcQwouzi462qWvQH7',
     },
     {
         id: 8,
@@ -30,6 +30,6 @@ export default [
             longitude: -73.5663,
         },
         image: require('../assets/images/montRealDataImages/youEcoImages/youEcoImage3.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLinkVracBocaux',
+        montRealMapLink: 'https://maps.app.goo.gl/RXfzP6fca8VbEaDh9',
     },
 ];

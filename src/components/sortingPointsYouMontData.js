@@ -8,7 +8,7 @@ export default [
             longitude: -73.6756,
         },
         image: require('../assets/images/montRealDataImages/youSortingMontImages/montSortingImage1.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLinkLaSalle',
+        montRealMapLink: 'https://maps.app.goo.gl/mU5EPjfbBS66XSX3A',
     },
     {
         id: 10,
@@ -19,7 +19,7 @@ export default [
             longitude: -73.6206,
         },
         image: require('../assets/images/montRealDataImages/youSortingMontImages/montSortingImage2.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLinkSaintMichel',
+        montRealMapLink: 'https://maps.app.goo.gl/o71ThGFvjPneY6eN8',
     },
     {
         id: 11,
@@ -30,6 +30,6 @@ export default [
             longitude: -73.6289,
         },
         image: require('../assets/images/montRealDataImages/youSortingMontImages/montSortingImage3.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLinkCotedesNeiges',
+        montRealMapLink: 'https://maps.app.goo.gl/6duqmAGFpdBqNpuy7',
     },
 ];

@@ -8,7 +8,7 @@ export default [
             longitude: -73.5986,
         },
         image: require('../assets/images/montRealDataImages/youMontCafeImages/cafeMontImage1.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLinkLolaRosa',
+        montRealMapLink: 'https://maps.app.goo.gl/gm5QbFAaJrNrLxqA7',
     },
     {
         id: 13,
@@ -19,7 +19,7 @@ export default [
             longitude: -73.5895,
         },
         image: require('../assets/images/montRealDataImages/youMontCafeImages/cafeMontImage2.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLinkAuxVivres',
+        montRealMapLink: 'https://maps.app.goo.gl/EgzSHt3aibzujfGRA',
     },
     {
         id: 14,
@@ -30,7 +30,7 @@ export default [
             longitude: -73.5967,
         },
         image: require('../assets/images/montRealDataImages/youMontCafeImages/cafeMontImage3.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLinkInvitationV',
+        montRealMapLink: 'https://maps.app.goo.gl/GzGHtbEBmz9o212H7',
     },
     {
         id: 15,
@@ -41,7 +41,7 @@ export default [
             longitude: -73.5696,
         },
         image: require('../assets/images/montRealDataImages/youMontCafeImages/cafeMontImage4.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLinkCafeParvis',
+        montRealMapLink: 'https://maps.app.goo.gl/nRVubSwtFRAVCi3XA',
     },
     {
         id: 16,
@@ -52,7 +52,7 @@ export default [
             longitude: -73.5679,
         },
         image: require('../assets/images/montRealDataImages/youMontCafeImages/cafeMontImage5.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLinkLePasseCompose',
+        montRealMapLink: 'https://maps.app.goo.gl/8WotjuWZsVDhV5nu6',
     },
     {
         id: 17,
@@ -63,6 +63,6 @@ export default [
             longitude: -73.6045,
         },
         image: require('../assets/images/montRealDataImages/youMontCafeImages/cafeMontImage6.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLinkStViateur',
+        montRealMapLink: 'https://maps.app.goo.gl/q2DFJdBGEehJMwFAA',
     },
 ];

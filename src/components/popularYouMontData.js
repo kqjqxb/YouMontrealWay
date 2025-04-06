@@ -8,7 +8,7 @@ export default [
             longitude: -73.5560,
         },
         image: require('../assets/images/montRealDataImages/popularImages/popularIm1.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLink1',
+        montRealMapLink: 'https://maps.app.goo.gl/hbFcroZ9NDXNm9zN8',
     },
     {
         id: 2,
@@ -19,7 +19,7 @@ export default [
             longitude: -73.5872,
         },
         image: require('../assets/images/montRealDataImages/popularImages/popularIm2.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLink2',
+        montRealMapLink: 'https://maps.app.goo.gl/15YYvqdP4J9bX1qx7',
     },
     {
         id: 3,
@@ -30,7 +30,7 @@ export default [
             longitude: -73.6136,
         },
         image: require('../assets/images/montRealDataImages/popularImages/popularIm3.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLink3',
+        montRealMapLink: 'https://maps.app.goo.gl/9hm29BiQnZQAQgj77',
     },
     {
         id: 4,
@@ -41,7 +41,7 @@ export default [
             longitude: -73.5510,
         },
         image: require('../assets/images/montRealDataImages/popularImages/popularIm4.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLink4',
+        montRealMapLink: 'https://maps.app.goo.gl/HtRFtgqwjjYKwNCW6',
     },
     {
         id: 5,
@@ -52,6 +52,6 @@ export default [
             longitude: -73.5790,
         },
         image: require('../assets/images/montRealDataImages/popularImages/popularIm5.png'),
-        montRealMapLink: 'https://maps.app.goo.gl/YourLink5',
+        montRealMapLink: 'https://maps.app.goo.gl/Led6NNevc6PVzstz8',
     },
 ];
