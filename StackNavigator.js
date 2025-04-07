@@ -17,7 +17,7 @@ import LoadYouMontAppScreen from './src/screens/LoadYouMontAppScreen';
 
 const Stack = createNativeStackNavigator();
 
-const YouMontRealStask = () => {
+const YouMontRealStack = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider store={store}>
@@ -93,4 +93,4 @@ const AppNavigator = () => {
 };
 
 
-export default YouMontRealStask;
+export default YouMontRealStack;

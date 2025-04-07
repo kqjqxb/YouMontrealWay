@@ -1,8 +1,8 @@
 import React from 'react';
-import YouMontRealStask from './StackNavigator';
+import YouMontRealStack from './StackNavigator';
 
 function App() {
-  return <YouMontRealStask />;
+  return <YouMontRealStack />;
 }
 
 export default App;
